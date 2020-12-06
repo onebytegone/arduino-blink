@@ -26,10 +26,10 @@ reportsize:
 	avr-size -A $(PROJECT_OUTPUT_FILE)
 
 %.c.o: %.c
-	avr-gcc -c -g -Os -Wall -mmcu=$(DEVICE) -DF_CPU=$(CPU_FREQ) $(patsubst %,-I%,$(INCLUDE_DIRECTORIES)) $< -o $@
+	avr-gcc -c -g -Os -Wall -ffunction-sections -fdata-sections -mmcu=$(DEVICE) -DF_CPU=$(CPU_FREQ) $(patsubst %,-I%,$(INCLUDE_DIRECTORIES)) $< -o $@
 
 %.cpp.o: %.cpp
-	avr-g++ -c -g -Os -Wall -mmcu=$(DEVICE) -DF_CPU=$(CPU_FREQ) $(patsubst %,-I%,$(INCLUDE_DIRECTORIES)) $< -o $@
+	avr-g++ -c -g -Os -Wall -ffunction-sections -fdata-sections -mmcu=$(DEVICE) -DF_CPU=$(CPU_FREQ) $(patsubst %,-I%,$(INCLUDE_DIRECTORIES)) $< -o $@
 
 %.S.o: %.S
 	avr-gcc -c -g -x assembler-with-cpp -mmcu=$(DEVICE) -DF_CPU=$(CPU_FREQ) $(patsubst %,-I%,$(INCLUDE_DIRECTORIES)) $< -o $@
@@ -37,7 +37,7 @@ reportsize:
 .SECONDARY: src/$(PROJECT_NAME).elf
 .PRECIOUS: $(OBJECT_FILES)
 %.elf: $(OBJECT_FILES)
-	avr-gcc -g -Os -Wall -mmcu=atmega328p $(patsubst %,-I%,$(INCLUDE_DIRECTORIES)) $(OBJECT_FILES) -o $@ -lm
+	avr-gcc -g -Os -Wall -Wl,--gc-sections -mmcu=atmega328p $(patsubst %,-I%,$(INCLUDE_DIRECTORIES)) $(OBJECT_FILES) -o $@ -lm
 
 %.hex: %.elf
 	avr-objcopy -O ihex -R .eeprom $< $@
