@@ -1,18 +1,17 @@
-#include <avr/io.h>
-#include <util/delay.h>
+#include <Arduino.h>
 
 #define BLINK_DELAY_MS 1000
 
-int main(void) {
-   DDRB |= _BV(DDB5);
+void setup() {
+   pinMode(13, OUTPUT);
+}
 
-   while (1) {
-      PORTB |= _BV(PORTB5);
+void loop() {
+   digitalWrite(13, HIGH);
 
-      _delay_ms(BLINK_DELAY_MS);
+   delay(BLINK_DELAY_MS);
 
-      PORTB &= ~_BV(PORTB5);
+   digitalWrite(13, LOW);
 
-      _delay_ms(BLINK_DELAY_MS);
-   }
+   delay(BLINK_DELAY_MS);
 }
