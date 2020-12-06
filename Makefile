@@ -1,7 +1,7 @@
 PROJECT_NAME = blink
 PROJECT_OUTPUT_FILE = src/$(PROJECT_NAME).hex
-SRC_C = src/$(PROJECT_NAME).c
-SRC_CPP =
+SRC_C =
+SRC_CPP = src/$(PROJECT_NAME).cpp
 
 DEVICE = atmega328p
 CPU_FREQ = 16000000 # in Hz
