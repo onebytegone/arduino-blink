@@ -1,4 +1,7 @@
-PROJECT_NAME = blink
+ifndef PROJECT_NAME
+$(error PROJECT_NAME must be set)
+endif
+
 PROJECT_OUTPUT_FILE = src/$(PROJECT_NAME).hex
 SRC_C =
 SRC_CPP = src/$(PROJECT_NAME).cpp

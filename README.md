@@ -22,7 +22,7 @@ on the host.
 To build the code, run:
 
 ```bash
-docker run --rm -v $(pwd):/project -it onebytegone/arduino-blink make build
+./bin/build.sh
 ```
 
 To list the ports that your device might be attached to:
@@ -34,7 +34,7 @@ ls /dev/tty.*
 To upload the built code to your device, run:
 
 ```bash
-avrdude -F -V -c arduino -p atmega328p -P /dev/tty.usbmodem123 -b 115200 -U flash:w:src/blink.hex
+./bin/flash.sh /dev/tty.usbmodem123
 ```
 
 ## Tested on
